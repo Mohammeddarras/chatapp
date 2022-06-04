@@ -22,8 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth =
-    await googleUser.authentication;
+    final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
     // Create a new credential
     final GoogleAuthCredential credential = GoogleAuthProvider.credential(
@@ -37,11 +36,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<UserCredential> signInWithFacebook() async {
     // Trigger the sign-in flow
-    final AccessToken result = await FacebookAuth.instance.login();
+    final AccessToken result = (await FacebookAuth.instance.login()) as AccessToken;
 
     // Create a credential from the access token
-    final FacebookAuthCredential facebookAuthCredential =
-    FacebookAuthProvider.credential(result.token);
+    final FacebookAuthCredential facebookAuthCredential = FacebookAuthProvider.credential(result.token);
 
     // Once signed in, return the UserCredential
     return await FirebaseAuth.instance

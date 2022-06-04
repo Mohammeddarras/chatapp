@@ -48,7 +48,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             SizedBox(
               height: 48.0,
             ),
-            Padding(
+            Padding
+              (
               padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Material(
               elevation: 5.0,

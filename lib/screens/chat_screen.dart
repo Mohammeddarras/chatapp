@@ -28,7 +28,7 @@ class _ChatScreenState extends State<ChatScreen> {
   final picker = ImagePicker();
 
   Future pickImage() async {
-    final pickedFile = await picker.getImage(source: ImageSource.camera);
+    final pickedFile = await picker.pickImage(source: ImageSource.camera);
 
     setState(() {
       _imageFile = File(pickedFile.path);
@@ -71,7 +71,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void getCurrentUser() async {
     var user = await FirebaseAuth.instance.currentUser;
-    if (user != null) loggedUser = user;
+    if (user != null)
+      loggedUser = user;
 
     //print(loggedUser.email);
   }
@@ -87,7 +88,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: null,
-        actions: <Widget>[
+        actions: [
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
@@ -109,7 +110,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 if (snapshot.hasData) {
                   var messages = snapshot.data.docs;
                   List<MessageBubble> msgWidgets = [];
-                  for (var msg in messages) {
+                  for (dynamic msg in messages) {
                     var msgText = msg.data()["text"];
                     var msgSender = msg.data()["sender"];
                     var msgType = msg.data()["type"];
@@ -139,7 +140,7 @@ class _ChatScreenState extends State<ChatScreen> {
               decoration: kMessageContainerDecoration,
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
+                children: [
                   Expanded(
                     child: TextField(
                       controller: msgController,
@@ -167,7 +168,10 @@ class _ChatScreenState extends State<ChatScreen> {
                   ),
                   IconButton(
                       icon: Icon(Icons.camera, color: Colors.lightBlueAccent),
-                      onPressed: pickImage),
+                      onPressed: (){
+                        pickImage();
+                      }
+                  ),
                 ],
               ),
             ),

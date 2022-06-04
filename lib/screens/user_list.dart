@@ -11,7 +11,7 @@ class UsersList extends StatefulWidget {
 
 class _UsersListState extends State<UsersList> {
   var _firestore = FirebaseFirestore.instance;
-  List<String> users = [];
+  List<dynamic> users = [];
 
   void getUsers() async {
     var fbusers = await _firestore.collection("users").get();
@@ -45,8 +45,7 @@ class _UsersListState extends State<UsersList> {
                         Navigator.pushNamed(context, ChatScreen.id);
                       },
                       child: Card(
-                        margin:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                        margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                         child: Container(
                           decoration: BoxDecoration(color: Color(0xffffffff)),
                           child: ListTile(
@@ -55,7 +54,7 @@ class _UsersListState extends State<UsersList> {
                               color: Colors.black54,
                             ),
                             title: Text(
-                              users[index],
+                              users[index]["email"].toString(),
                               style: TextStyle(
                                   color: Colors.black54,
                                   fontWeight: FontWeight.bold),
